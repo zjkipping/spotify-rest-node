@@ -22,5 +22,9 @@ module.exports = async function () {
     }
   );
 
-  return await response.json();
+  const auth = await response.json();
+
+  console.log(auth);
+
+  return auth;
 };

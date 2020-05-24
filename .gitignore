@@ -1,5 +1,6 @@
-config.js
 node_modules
+
+config.js
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
