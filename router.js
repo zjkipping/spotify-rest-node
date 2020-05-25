@@ -17,7 +17,7 @@ async function getTrack(query, auth) {
     );
 
     if (!response.ok) {
-      console.log(response);
+      console.log(await response.text());
       return null;
     }
 
@@ -52,8 +52,8 @@ const startRoutes = async () => {
   let auth = await getSpotifyAuth();
 
   setInterval(
-    async () => (auth = await getSpotifyAuth),
-    20 * 60 * 1000
+    async () => (auth = await getSpotifyAuth()),
+    50 * 60 * 1000
   );
 
   router.get('/track', async (req, res) => {

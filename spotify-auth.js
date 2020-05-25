@@ -10,21 +10,31 @@ module.exports = async function () {
     grant_type: 'client_credentials',
   });
 
-  const response = await fetch(
-    'https://accounts.spotify.com/api/token',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${encodedCredentials}`,
-      },
-      body,
+  try {
+    const response = await fetch(
+      'https://accounts.spotify.com/api/token',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${encodedCredentials}`,
+        },
+        body,
+      }
+    );
+
+    if (!response.ok) {
+      console.log(await response.text());
+      return null;
     }
-  );
 
-  const auth = await response.json();
+    const auth = await response.json();
 
-  console.log(auth);
+    console.log(auth);
 
-  return auth;
+    return auth;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
